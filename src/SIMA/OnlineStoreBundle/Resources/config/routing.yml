@@ -1,0 +1,14 @@
+sima_online_store_homepage:
+    path:     /
+    defaults: { _controller: SIMAOnlineStoreBundle:Default:index }
+
+categories:
+    path: /category/{id}
+    defaults: { _controller: SIMAOnlineStoreBundle:Category:showArticles }
+
+
+categories:
+   path: /categories/{category}.{_format}
+   defaults: { _controller: SIMAOnlineStoreBundle:Category:show }
+   requirements:
+        category: \d{4}
