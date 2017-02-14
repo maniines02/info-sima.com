@@ -115,6 +115,12 @@ class ArticlePrice
     private $updatedBy;
 
     /**
+     * @ORM\OneToOne( targetEntity="SIMA\OnlineStoreBundle\Entity\article")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $article;
+
+    /**
      * Get id
      *
      * @return integer

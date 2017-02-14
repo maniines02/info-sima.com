@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="SIMA\OnlineStoreBundle\Repository\CategoryRepository")
+ * @ORM\HaslifecycleCallbacks()
  */
 class Category
 {
@@ -106,6 +107,11 @@ class Category
     {
         $this->subCategories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+     public function __toString()
+    {
+        return $this->label;
     }
 
     /**
@@ -424,5 +430,22 @@ class Category
     public function getUpdatedBy()
     {
         return $this->updatedBy;
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setCreatedAtValue(){
+        $this->createdAt = new \DateTime();
+        $this->isDeleted = false;
+    }
+
+
+    /**
+    * @ORM\PreUpdate
+    */
+    public function setUpdatedAtValue(){
+        $this->updatedBy = $this->getUser();
+        $this->updateAt = new \DateTime();
     }
 }

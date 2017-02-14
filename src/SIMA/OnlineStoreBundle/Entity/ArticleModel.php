@@ -86,6 +86,12 @@ class ArticleModel
     private $updatedBy;
 
     /**
+     * @ORM\OneToOne( targetEntity="SIMA\OnlineStoreBundle\Entity\Article")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $article;
+
+    /**
      * Constructor
      */
     public function __construct()

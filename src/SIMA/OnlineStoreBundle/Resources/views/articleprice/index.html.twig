@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Articleprices list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Purchaseprice</th>
+                <th>Priceht</th>
+                <th>Pricettc</th>
+                <th>Pricequotation</th>
+                <th>Pricediscont</th>
+                <th>Offerprice</th>
+                <th>Supplier</th>
+                <th>Createdat</th>
+                <th>Updateat</th>
+                <th>Isdeleted</th>
+                <th>Deletedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for articlePrice in articlePrices %}
+            <tr>
+                <td><a href="{{ path('articleprice_show', { 'id': articlePrice.id }) }}">{{ articlePrice.id }}</a></td>
+                <td>{{ articlePrice.purchasePrice }}</td>
+                <td>{{ articlePrice.priceHT }}</td>
+                <td>{{ articlePrice.priceTTC }}</td>
+                <td>{{ articlePrice.priceQuotation }}</td>
+                <td>{{ articlePrice.priceDiscont }}</td>
+                <td>{{ articlePrice.offerPrice }}</td>
+                <td>{{ articlePrice.supplier }}</td>
+                <td>{% if articlePrice.createdAt %}{{ articlePrice.createdAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if articlePrice.updateAt %}{{ articlePrice.updateAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if articlePrice.isDeleted %}Yes{% else %}No{% endif %}</td>
+                <td>{% if articlePrice.deletedAt %}{{ articlePrice.deletedAt|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('articleprice_show', { 'id': articlePrice.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('articleprice_edit', { 'id': articlePrice.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('articleprice_new') }}">Create a new articlePrice</a>
+        </li>
+    </ul>
+{% endblock %}

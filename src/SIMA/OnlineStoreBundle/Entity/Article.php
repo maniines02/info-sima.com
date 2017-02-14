@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="SIMA\OnlineStoreBundle\Repository\ArticleRepository")
+ * @ORM\HaslifecycleCallbacks()
  */
 class Article
 {
@@ -57,18 +58,6 @@ class Article
     private $category;
 
     /**
-     * @ORM\OneToOne( targetEntity="SIMA\OnlineStoreBundle\Entity\ArticleModel")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $articleModel;
-
-    /**
-     * @ORM\OneToOne( targetEntity="SIMA\OnlineStoreBundle\Entity\ArticlePrice", cascade={"persist"} )
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $articlePrice;
-
-    /**
      * @ORM\OneToMany( targetEntity="SIMA\OnlineStoreBundle\Entity\Picture", mappedBy="article" )
      * @ORM\JoinColumn(nullable=false)
      */
@@ -77,14 +66,14 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="date")
+     * @ORM\Column(name="createdAt", type="date", nullable=true))
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updateAt", type="date")
+     * @ORM\Column(name="updateAt", type="date", nullable=true)
      */
     private $updateAt;
 
@@ -370,7 +359,7 @@ class Article
      *
      * @return Article
      */
-    public function setUpdateAt($updateAt)
+    public function setUpdateAt($updateAt = null)
     {
         $this->updateAt = $updateAt;
 
@@ -505,5 +494,21 @@ class Article
     public function getUpdatedBy()
     {
         return $this->updatedBy;
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setCreatedAtValue(){
+        $this->createdAt = new \DateTime();
+        $this->isDeleted = false;
+    }
+
+    /**
+    * @ORM\PreUpdate
+    */
+    public function setUpdatedAtValue(){
+        $this->updatedBy = $this->getUser();
+        $this->updateAt = new \DateTime();
     }
 }

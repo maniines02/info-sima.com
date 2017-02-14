@@ -1,3 +1,27 @@
+sima_online_store_article_model:
+    resource: "@SIMAOnlineStoreBundle/Controller/ArticleModelController.php"
+    type:     annotation
+
+sima_online_store_technical_detail_item:
+    resource: "@SIMAOnlineStoreBundle/Controller/TechnicalDetailItemController.php"
+    type:     annotation
+
+sima_online_store_characteristic_type:
+    resource: "@SIMAOnlineStoreBundle/Controller/CharacteristicTypeController.php"
+    type:     annotation
+
+sima_online_store_category:
+    resource: "@SIMAOnlineStoreBundle/Controller/CategoryController.php"
+    type:     annotation
+
+sima_online_store_article_price:
+    resource: "@SIMAOnlineStoreBundle/Controller/ArticlePriceController.php"
+    type:     annotation
+
+sima_online_store_article:
+    resource: "@SIMAOnlineStoreBundle/Controller/ArticleController.php"
+    type:     annotation
+
 sima_online_store:
     resource: "@SIMAOnlineStoreBundle/Resources/config/routing.yml"
     prefix: /
